@@ -2,7 +2,7 @@
 const CFG={
   wa:'5515991748568',
   addr:'Av. Dr. Artur Bernardes, 1320 - Vila Gabriel, Sorocaba - SP, 18081-000', // ativa mapa e "Como chegar"
-  heroImg:'',         // caminho/URL da foto do hero
+  heroImg:'img/hero.jpg',         // caminho/URL da foto do hero
   imgs:{about:'img/treino.jpg',ronaldo:'',leo:'',eduardo:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
     {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'}
