@@ -14,13 +14,13 @@ const CFG={
     {n:'Adulto Iniciante',age:'18+',lv:'Iniciante',h:['Ter e Qui · 20h30 às 22h00','Sáb · 09h00 às 10h30'],d:'Para adultos que estão começando no voleibol.'},
     {n:'Adulto Avançado',age:'18+',lv:'Avançado',h:['Seg, Qua e Sex · 20h30 às 22h00','Sáb · 10h30 às 11h45'],d:'Treinamento avançado para adultos.'}
   ],
-  sponsors:[ // name, logo (caminho da imagem), site, insta (@usuario ou link), wa (só números com DDI), email, addr (endereço)
+  parceiros:[ // name, logo (caminho da imagem), site, insta (@usuario ou link), wa (só números com DDI), email, addr (endereço)
     {name:'N1 Sport',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Patrocinador 2',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Patrocinador 3',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Patrocinador 4',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Patrocinador 5',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Patrocinador 6',logo:'',site:'',insta:'',wa:'',email:'',addr:''}
+    {name:'Parceiro 2',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
+    {name:'Parceiro 3',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
+    {name:'Parceiro 4',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
+    {name:'Parceiro 5',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
+    {name:'Parceiro 6',logo:'',site:'',insta:'',wa:'',email:'',addr:''}
   ],
   n1:{ // vitrine (sem preço e sem pedido)
     text:'[Texto sobre a N1 Sport — editar]',
@@ -67,16 +67,16 @@ nav.querySelectorAll('a').forEach(a=>a.onclick=()=>{nav.classList.remove('o');hb
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(e=>io.observe(e));
 
-/* patrocinadores */
+/* parceiros */
 const sm=$('#sm'),smn=$('#smn'),sml=$('#sml');
-CFG.sponsors.forEach(s=>{const b=document.createElement('button');b.setAttribute('aria-label',s.name);b.innerHTML='<span>'+s.name+'</span>';img(b,s.logo,s.name);
+CFG.parceiros.forEach(s=>{const b=document.createElement('button');b.setAttribute('aria-label',s.name);b.innerHTML='<span>'+s.name+'</span>';img(b,s.logo,s.name);
  b.onclick=()=>{smn.textContent=s.name;const L=[];
   if(s.addr)L.push(['📍 Localização','https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.addr)]);
   if(s.site)L.push(['🌐 Site',/^https?:/.test(s.site)?s.site:'https://'+s.site]);
   if(s.insta)L.push(['📸 Instagram',/^https?:/.test(s.insta)?s.insta:'https://www.instagram.com/'+s.insta.replace('@','')]);
   if(s.wa)L.push(['📱 WhatsApp','https://wa.me/'+s.wa]);
   if(s.email)L.push(['✉️ E-mail','mailto:'+s.email]);
-  sml.innerHTML=L.length?L.map(l=>'<a class="btn b3" target="_blank" rel="noopener" href="'+l[1]+'">'+l[0]+'</a>').join(''):'<p class="ed">[Contatos do patrocinador — editar]</p>';
+  sml.innerHTML=L.length?L.map(l=>'<a class="btn b3" target="_blank" rel="noopener" href="'+l[1]+'">'+l[0]+'</a>').join(''):'<p class="ed">[Contatos do parceiro — editar]</p>';
   sm.classList.add('o')};
  $('#sp').append(b)});
 sm.onclick=e=>{if(e.target===sm||e.target.tagName==='BUTTON')sm.classList.remove('o')};
