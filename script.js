@@ -7,12 +7,12 @@ const CFG={
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
     {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'}
   ],
-  cats:[ // faixa e horário editáveis
-    {n:'Iniciante',lv:'Primeiros passos no voleibol',d:'Fundamentos e coordenação em ambiente acolhedor.'},
-    {n:'Intermediário',lv:'Evolução técnica',d:'Aprimoramento de fundamentos e início da leitura de jogo.'},
-    {n:'Avançado',lv:'Alto rendimento',d:'Treino intenso com foco tático, físico e competitivo.'},
-    {n:'Juvenil',lv:'Formação de base',d:'Desenvolvimento esportivo e pessoal de jovens atletas.'},
-    {n:'Adulto',lv:'Todos os níveis',d:'Treinos para quem quer jogar, evoluir e manter o ritmo.'}
+  cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
+    {n:'Iniciantes',age:'6 a 10 anos',lv:'Iniciante',h:['Ter e Qui · 16h30 às 17h30'],d:'Primeiros passos no voleibol para as crianças.'},
+    {n:'Intermediário',age:'11 a 14 anos',lv:'Intermediário',h:['Seg a Sex · 17h30 às 19h00'],d:'Evolução técnica e desenvolvimento dos fundamentos.'},
+    {n:'Juvenil',age:'15 a 17 anos',lv:'Avançado',h:['Seg a Sex · 19h00 às 20h30'],d:'Treinamento avançado para atletas juvenis.'},
+    {n:'Adulto Iniciante',age:'18+',lv:'Iniciante',h:['Ter e Qui · 20h30 às 22h00','Sáb · 09h00 às 10h30'],d:'Para adultos que estão começando no voleibol.'},
+    {n:'Adulto Avançado',age:'18+',lv:'Avançado',h:['Seg, Qua e Sex · 20h30 às 22h00','Sáb · 10h30 às 11h45'],d:'Treinamento avançado para adultos.'}
   ],
   msg:{
     exp:'Olá! Gostaria de agendar uma aula experimental na AVAP.',
@@ -27,7 +27,7 @@ function img(el,src,alt){if(src){const i=new Image();i.src=src;i.alt=alt||'';i.l
 if(CFG.heroImg)$('#heroBg').style.backgroundImage='url("'+CFG.heroImg+'")';
 document.querySelectorAll('[data-img]').forEach(e=>img(e,CFG.imgs[e.dataset.img],e.textContent));
 /* categorias */
-$('#cats').innerHTML=CFG.cats.map(c=>`<div class="card"><h3>${c.n}</h3><dl><dt>Faixa etária: </dt><dd class="ed">[editar]</dd><br><dt>Nível: </dt><dd>${c.lv}</dd><br><dt>Horários: </dt><dd class="ed">[editar]</dd></dl><p>${c.d}</p><a class="btn b3" target="_blank" rel="noopener" href="${wa('Olá! Tenho interesse no treinamento da categoria '+c.n+' na AVAP.')}">Quero treinar</a></div>`).join('');
+$('#cats').innerHTML=CFG.cats.map(c=>`<div class="card"><h3>${c.n}</h3><dl><dt>Faixa etária: </dt><dd>${c.age}</dd><br><dt>Nível: </dt><dd>${c.lv}</dd><br><dt>Horários:</dt><br>${c.h.map(x=>'<dd>'+x+'</dd>').join('<br>')}</dl><p>${c.d}</p><a class="btn b3" target="_blank" rel="noopener" href="${wa('Olá! Tenho interesse no treinamento da categoria '+c.n+' na AVAP.')}">Quero treinar</a></div>`).join('');
 /* galeria + lightbox */
 const gal=$('#gal'),lb=$('#lb'),lbph=$('#lbph');
 CFG.gallery.forEach(g=>{const b=document.createElement('button');b.setAttribute('aria-label','Ampliar: '+g.alt);b.innerHTML='<div class="ph"><span>'+g.alt+'</span></div>';img(b.firstChild,g.src,g.alt);b.onclick=()=>{lbph.innerHTML='<span>'+g.alt+'</span>';img(lbph,g.src,g.alt);lb.classList.add('o')};gal.append(b)});
