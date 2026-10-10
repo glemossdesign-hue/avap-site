@@ -177,3 +177,7 @@ nav.o{transform:none}nav ul{flex-direction:column;gap:6px}nav a{font-size:1.05re
 .ct h3{display:flex;align-items:center;gap:10px}.ic{width:28px;height:28px;flex:none}
 .btn .ic{width:24px;height:24px;background:#fff;border-radius:50%;padding:3px}
 footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
+.fw{width:60px;height:60px;padding:0;gap:0;justify-content:center;border-radius:999px}
+.fw span,.fw:hover span,.fw:focus-visible span{max-width:0;padding:0}
+@media (hover:hover){.fw:hover,.fw:focus-visible{width:auto;padding:0 20px 0 16px;gap:10px}.fw:hover span,.fw:focus-visible span{max-width:220px}}
+@media (max-width:600px){.fw{padding:0;width:60px;height:60px}}
