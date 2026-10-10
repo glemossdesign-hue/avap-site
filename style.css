@@ -108,7 +108,7 @@ background:linear-gradient(100deg,rgba(7,24,15,.93) 25%,rgba(20,99,63,.6)),radia
 .loc{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:stretch;margin-top:30px}
 .map{min-height:320px;border-radius:var(--r);overflow:hidden;position:relative}
 .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.ct{grid-template-columns:repeat(3,1fr);margin:34px 0}
+.ct{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:34px 0}
 .ct .card h3{font-size:1.15rem;margin-bottom:6px;color:var(--g3)}
 .cb{display:flex;flex-wrap:wrap;gap:14px}
 .ig{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff}
@@ -172,3 +172,8 @@ header .hb{position:relative;z-index:2}
 @media (max-width:1240px){.hb{display:block}.hdcta{margin-left:auto}
 nav{position:fixed;inset:0 0 0 auto;width:min(300px,80vw);background:#07180f;padding:calc(106px + env(safe-area-inset-top,0px)) 28px 28px;transform:translateX(100%);transition:transform .3s;z-index:-1;overflow-y:auto}
 nav.o{transform:none}nav ul{flex-direction:column;gap:6px}nav a{font-size:1.05rem;display:block;padding:10px 0}header .hb{position:relative;z-index:2}}
+.btn.mail{background:transparent;color:var(--g2);border-color:var(--g2)}.btn.mail:hover{background:var(--g2);color:#fff}
+.btn[aria-disabled="true"]{opacity:.55;cursor:default}
+.ct h3{display:flex;align-items:center;gap:10px}.ic{width:28px;height:28px;flex:none}
+.btn .ic{width:24px;height:24px;background:#fff;border-radius:50%;padding:3px}
+footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
