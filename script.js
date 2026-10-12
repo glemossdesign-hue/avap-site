@@ -125,10 +125,17 @@ const norm=h=>h.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g
 const csv=t=>{const o=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';o.push(r);r=[]}else c+=ch}if(c||r.length){r.push(c);o.push(r)}return o};
 const pd=s=>{s=(s||'').trim();let m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1])}m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?new Date(+m[1],+m[2]-1,+m[3]):null};
 const clk='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',pin='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+const dst=x=>{$('#dstT').textContent=x.t||'Novidade';
+$('#dstM').innerHTML=(x.d?'<span class="dst-d"><b>'+String(x.d.getDate()).padStart(2,'0')+'</b>'+MES[x.d.getMonth()]+'</span>':'')+(x.h?'<span>'+clk+esc(x.h)+'</span>':'')+(x.l?'<span>'+pin+esc(x.l)+'</span>':'');
+$('#dstD').innerHTML=esc(x.s).replace(/\n/g,'<br>');
+if(x.foto)$('#dstBg').style.backgroundImage='url("'+(/^https?:/.test(x.foto)?encodeURI(x.foto):'img/'+encodeURI(x.foto.replace(/^.*\//,'')))+'")';
+const b=$('#dstB');if(x.btn&&x.lnk){b.textContent=x.btn;b.href=x.lnk.toLowerCase()=='whatsapp'?wa('Olá! Gostaria de saber mais sobre: '+(x.t||'a novidade da AVAP')+'.'):(/^(https?:|mailto:|tel:)/.test(x.lnk)?x.lnk:'https://'+x.lnk);b.hidden=false}
+$('#destaque').hidden=false};
 if(!N.url){msg('Em breve, novidades da AVAP por aqui.');return}
 try{const r=await fetch(N.url,{cache:'no-store'});if(!r.ok)throw 0;const rows=csv(await r.text()),hd=rows.shift().map(norm),ix=k=>hd.indexOf(k);
-const L=rows.map(c=>({raw:(c[ix('data')]||'').trim(),d:pd(c[ix('data')]),h:(c[ix('hora')]||'').trim(),l:(c[ix('local')]||'').trim(),t:(c[ix('titulo')]||'').trim(),s:(c[ix('descricao')]||'').trim()})).filter(x=>x.t||x.s);
+const L=rows.map(c=>({raw:(c[ix('data')]||'').trim(),d:pd(c[ix('data')]),h:(c[ix('hora')]||'').trim(),l:(c[ix('local')]||'').trim(),t:(c[ix('titulo')]||'').trim(),s:(c[ix('descricao')]||'').trim(),dest:(c[ix('destaque')]||'').trim(),ate:(c[ix('ate')]||'').trim(),foto:(c[ix('foto')]||'').trim(),btn:(c[ix('botao')]||'').trim(),lnk:(c[ix('link')]||'').trim()})).filter(x=>x.t||x.s);
 L.sort((a,b)=>(b.d?+b.d:-1)-(a.d?+a.d:-1)||b.h.localeCompare(a.h));
+const hoje=new Date();hoje.setHours(0,0,0,0);const F=L.find(x=>/^(sim|s|x|1)$/i.test(norm(x.dest))&&(!x.ate||!pd(x.ate)||pd(x.ate)>=hoje));if(F)dst(F);
 if(!L.length){msg('Em breve, novidades da AVAP por aqui.');return}
 const card=x=>{const age=x.d?(Date.now()-x.d)/864e5:null;return '<article class="nt-card"><div class="nt-d">'+(x.d?'<b>'+String(x.d.getDate()).padStart(2,'0')+'</b><span>'+MES[x.d.getMonth()]+'</span>':'<span class="raw">'+esc(x.raw)+'</span>')+'</div><div class="nt-b"><div class="nt-m">'+(x.h?'<span>'+clk+esc(x.h)+'</span>':'')+(x.l?'<span>'+pin+esc(x.l)+'</span>':'')+(age!==null&&age>=-1&&age<=14?'<span class="nt-new">Novo</span>':'')+'</div>'+(x.t?'<h3>'+esc(x.t)+'</h3>':'')+(x.s?'<p>'+esc(x.s).replace(/\n/g,'<br>')+'</p>':'')+'</div></article>'};
 const n=Math.max(1,N.inicial||4);box.innerHTML=L.slice(0,n).map(card).join('');

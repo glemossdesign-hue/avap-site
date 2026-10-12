@@ -199,3 +199,8 @@ footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
 .rc .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:none;border-left:4px solid var(--gold);display:flex;gap:14px;align-items:flex-start;padding:20px}
 .rc svg{flex:none;color:var(--gold)}.rc b{display:block;font:700 1.25rem var(--hd);text-transform:uppercase;letter-spacing:.02em;margin-bottom:2px}.rc span{color:#b9cdc2;font-size:.9rem}
 @media (max-width:960px){.rd{grid-template-columns:1fr}}
+.dst{padding:92px 0}.dst-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.28}
+.dst .w{position:relative;z-index:1;max-width:980px}.dst h2{font-size:clamp(2.6rem,8vw,5.4rem);margin:10px 0 18px}
+.dst-m{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;font-weight:600;margin-bottom:18px}.dst-m span{display:inline-flex;align-items:center;gap:6px}.dst-m svg{color:var(--gold)}
+.dst-d{background:var(--gold);color:#1a1405;border-radius:12px;padding:6px 14px;font:800 1.1rem var(--hd);letter-spacing:.08em;gap:8px}.dst-d b{font-size:2rem;line-height:1}
+.dk.dst .lead{font-size:1.15rem;max-width:60ch;color:#d6e4db}.dst .btn{margin-top:26px}
