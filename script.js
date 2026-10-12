@@ -12,7 +12,7 @@ const CFG={
       {nome:'Taça Paraná',info:''}
     ]
   },
-  noticias:{url:'',inicial:4}, // url = link CSV da planilha publicada; inicial = quantas notícias aparecem antes do "Ver mais"
+  noticias:{url:'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7QLsKiJswrkQ5jBPo_H3iVzxV8fD_GzGQewAMIzxx33wNA20ve1HZNKeyKwfkgXk7F0T0PiFzJyAx/pub?gid=0&single=true&output=csv',inicial:4}, // url = link CSV da planilha publicada; inicial = quantas notícias aparecem antes do "Ver mais"
   email:'',           // e-mail da AVAP (ex.: contato@seudominio.com.br)
   addr:'Av. Dr. Artur Bernardes, 1320 - Vila Gabriel, Sorocaba - SP, 18081-000', // ativa mapa e "Como chegar"
   heroImg:'img/hero.jpg',         // caminho/URL da foto do hero
