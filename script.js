@@ -1,6 +1,8 @@
 /* ===== CONFIGURAÇÃO EDITÁVEL ===== */
 const CFG={
   wa:'5515991748568',
+  noticias:{url:'',inicial:4}, // url = link CSV da planilha publicada; inicial = quantas notícias aparecem antes do "Ver mais"
+  email:'',           // e-mail da AVAP (ex.: contato@seudominio.com.br)
   addr:'Av. Dr. Artur Bernardes, 1320 - Vila Gabriel, Sorocaba - SP, 18081-000', // ativa mapa e "Como chegar"
   heroImg:'img/hero.jpg',         // caminho/URL da foto do hero
   imgs:{about:'img/treino.jpg',ronaldo:'',leo:'',eduardo:'',moises:'',arthur:''}, // fotos das seções
@@ -100,3 +102,24 @@ ds.forEach((d,i)=>d.onclick=()=>car.scrollTo({left:ctr(N+i),behavior:'smooth'}))
 const stp=()=>cs[0].offsetWidth+20;
 $('.pv').onclick=()=>car.scrollBy({left:-stp(),behavior:'smooth'});$('.nx').onclick=()=>car.scrollBy({left:stp(),behavior:'smooth'});
 addEventListener('load',()=>{car.scrollLeft=ctr(N+Math.floor(N/2));upd()});
+/* e-mail */
+(()=>{const e=CFG.email,b=$('#mailBtn'),t=$('#mailTxt'),f=$('#mailFoot');
+if(e){b.href='mailto:'+e+'?subject='+encodeURIComponent('Contato pelo site da AVAP');t.textContent=e;t.classList.remove('ed');f.href='mailto:'+e;f.textContent='E-mail '+e}
+else{b.removeAttribute('target');b.setAttribute('aria-disabled','true');b.title='Defina o e-mail em CFG.email';b.onclick=ev=>ev.preventDefault();f.parentElement.hidden=true}})();
+/* notícias (Google Sheets) */
+(async()=>{const box=$('#nt'),more=$('#ntMore'),N=CFG.noticias,MES=['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
+const msg=t=>{box.innerHTML='<p class="nt-msg">'+t+'</p>'};
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=h=>h.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const csv=t=>{const o=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';o.push(r);r=[]}else c+=ch}if(c||r.length){r.push(c);o.push(r)}return o};
+const pd=s=>{s=(s||'').trim();let m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1])}m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?new Date(+m[1],+m[2]-1,+m[3]):null};
+const clk='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',pin='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+if(!N.url){msg('Em breve, novidades da AVAP por aqui.');return}
+try{const r=await fetch(N.url,{cache:'no-store'});if(!r.ok)throw 0;const rows=csv(await r.text()),hd=rows.shift().map(norm),ix=k=>hd.indexOf(k);
+const L=rows.map(c=>({raw:(c[ix('data')]||'').trim(),d:pd(c[ix('data')]),h:(c[ix('hora')]||'').trim(),l:(c[ix('local')]||'').trim(),t:(c[ix('titulo')]||'').trim(),s:(c[ix('descricao')]||'').trim()})).filter(x=>x.t||x.s);
+L.sort((a,b)=>(b.d?+b.d:-1)-(a.d?+a.d:-1)||b.h.localeCompare(a.h));
+if(!L.length){msg('Em breve, novidades da AVAP por aqui.');return}
+const card=x=>{const age=x.d?(Date.now()-x.d)/864e5:null;return '<article class="nt-card"><div class="nt-d">'+(x.d?'<b>'+String(x.d.getDate()).padStart(2,'0')+'</b><span>'+MES[x.d.getMonth()]+'</span>':'<span class="raw">'+esc(x.raw)+'</span>')+'</div><div class="nt-b"><div class="nt-m">'+(x.h?'<span>'+clk+esc(x.h)+'</span>':'')+(x.l?'<span>'+pin+esc(x.l)+'</span>':'')+(age!==null&&age>=-1&&age<=14?'<span class="nt-new">Novo</span>':'')+'</div>'+(x.t?'<h3>'+esc(x.t)+'</h3>':'')+(x.s?'<p>'+esc(x.s).replace(/\n/g,'<br>')+'</p>':'')+'</div></article>'};
+const n=Math.max(1,N.inicial||4);box.innerHTML=L.slice(0,n).map(card).join('');
+if(L.length>n){more.hidden=false;more.onclick=()=>{box.innerHTML=L.map(card).join('');more.hidden=true}}
+}catch(e){msg('Não foi possível carregar as notícias agora. Tente novamente mais tarde.')}})();
