@@ -58,7 +58,7 @@ const CFG={
 const wa=m=>'https://wa.me/'+CFG.wa+'?text='+encodeURIComponent(m);
 document.querySelectorAll('[data-wa]').forEach(a=>a.href=wa(CFG.msg[a.dataset.wa]));
 const $=s=>document.querySelector(s);
-function img(el,src,alt){if(src){const i=new Image();i.src=src;i.alt=alt||'';i.loading='lazy';el.prepend(i);const s=el.querySelector('span');if(s)s.remove()}}
+function img(el,src,alt){if(src){const i=new Image();i.src=src;i.alt=alt||'';i.loading='lazy';el.prepend(i);el.classList.add('has');const s=el.querySelector('span');if(s)s.remove()}}
 if(CFG.heroImg)$('#heroBg').style.backgroundImage='url("'+CFG.heroImg+'")';
 document.querySelectorAll('[data-img]').forEach(e=>img(e,CFG.imgs[e.dataset.img],e.textContent));
 /* categorias */
