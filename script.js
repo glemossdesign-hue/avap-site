@@ -5,7 +5,7 @@ const CFG={
     texto:'O time de rendimento da AVAP é formado pelas categorias feminina e masculina sub 17 e participa de campeonatos.',
     times:[ // n (nome), cat (categoria), d (descrição), src (foto)
       {n:'Feminino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/time-feminino.jpg'},
-      {n:'Masculino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/hero.jpg'}
+      {n:'Masculino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/time-masculino.jpg'}
     ],
     campeonatos:[ // nome, info (ano, fase ou resultado)
       {nome:'Liga de Vôlei de Sorocaba e Região',info:''},
