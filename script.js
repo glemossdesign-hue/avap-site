@@ -36,17 +36,14 @@ const CFG={
     {name:'Parceiro 6',logo:'',site:'',insta:'',wa:'',email:'',addr:''}
   ],
   n1:{ // vitrine (sem preço e sem pedido)
-    text:'[Texto sobre a N1 Sport — editar]',
+    text:'Conheça nossos produtos oficiais',
     products:[ // n (nome), badge (qualidade), d (descrição), colors (cores), src (foto)
-      {n:'Joelheira',badge:'Slide',d:'Qualidade básica.',colors:['Branca','Preta'],src:''},
-      {n:'Joelheira',badge:'Flyer',d:'Qualidade intermediária.',colors:['Branca','Preta'],src:''},
-      {n:'Joelheira',badge:'Spry',d:'Usada pela Seleção Brasileira.',colors:['Branca','Preta'],src:''},
-      {n:'Manguito',badge:'Slide',d:'Qualidade básica.',colors:['Branca','Preta'],src:''},
-      {n:'Manguito',badge:'Flyer',d:'Qualidade intermediária.',colors:['Branca','Preta'],src:''},
-      {n:'Manguito',badge:'Spry',d:'Usado pela Seleção Brasileira.',colors:['Branca','Preta'],src:''},
-      {n:'Meia',badge:'',d:'',colors:['Branca','Preta'],src:''},
-      {n:'Meia',badge:'',d:'',colors:['Branca','Preta'],src:''},
-      {n:'Meia',badge:'',d:'',colors:['Branca','Preta'],src:''}
+      {n:'Antebraço',badge:'',d:'',colors:['Preto','Branco'],src:'img/n1-antebraco.jpg'},
+      {n:'Meia cano médio',badge:'',d:'',colors:['Preta','Branca'],src:'img/n1-meia-medio.jpg'},
+      {n:'Meia cano longo',badge:'',d:'',colors:['Preta','Branca'],src:'img/n1-meia-longo.jpg'},
+      {n:'Joelheira',badge:'Spry',d:'Usada pela Seleção Brasileira.',colors:['Preta','Branca'],src:'img/n1-joelheira-spry.jpg'},
+      {n:'Joelheira',badge:'Flyer',d:'Qualidade intermediária.',colors:['Preta','Branca'],src:'img/n1-joelheira-flyer.jpg'},
+      {n:'Joelheira',badge:'Slide',d:'Qualidade básica.',colors:['Preta','Branca'],src:'img/n1-joelheira-slide.jpg'}
     ]
   },
   msg:{
@@ -98,8 +95,8 @@ addEventListener('keydown',e=>{if(e.key==='Escape')sm.classList.remove('o')});
 /* N1 Sport: vitrine em loop infinito */
 const n1=CFG.n1,P=n1.products,N=P.length,car=$('#car'),dots=$('#dots');
 $('#n1txt').textContent=n1.text;if(/\[/.test(n1.text))$('#n1txt').classList.add('ed');
-const col=c=>({branca:'#fff',preta:'#111'})[c.toLowerCase()]||'#9aa9a0';
-const card=p=>`<article class="pc"><span class="bd"${p.badge?'':' hidden'}>${p.badge||''}</span><div class="ph"><span>${p.n}</span></div><h3>${p.n}</h3><p class="${p.d?'':'ed'}">${p.d||'[Descrição — editar]'}</p><div class="cl"><small>Cores disponíveis</small>${p.colors.map(c=>'<span class="cc"><i style="background:'+col(c)+'"></i>'+c+'</span>').join('')}</div></article>`;
+const col=c=>({branca:'#fff',branco:'#fff',preta:'#111',preto:'#111'})[c.toLowerCase()]||'#9aa9a0';
+const card=p=>`<article class="pc"><span class="bd"${p.badge?'':' hidden'}>${p.badge||''}</span><div class="ph"><span>${p.n}</span></div><h3>${p.n}</h3>${p.d?'<p>'+p.d+'</p>':''}<div class="cl"><small>Cores disponíveis</small>${p.colors.map(c=>'<span class="cc"><i style="background:'+col(c)+'"></i>'+c+'</span>').join('')}</div></article>`;
 car.innerHTML=[0,1,2].map(()=>P.map(card).join('')).join('');
 dots.innerHTML=P.map(()=>'<i></i>').join('');
 const cs=[...car.children],ds=[...dots.children];
