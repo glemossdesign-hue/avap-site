@@ -221,3 +221,4 @@ footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
 @media (min-width:1501px){header .w{max-width:1440px}nav ul{gap:16px}nav a{font-size:.82rem}}
 @media (min-width:961px){.hero h1{max-width:13ch}}
 .pc .ph{aspect-ratio:4/5}
+.dst{min-height:1200px;display:flex;align-items:center}.dst[hidden]{display:none}.dst .w{width:100%}
