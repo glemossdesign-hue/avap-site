@@ -19,6 +19,7 @@ const CFG={
   imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
     {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'}
+    {src:'img/seleção.jpg',alt:'Seleção de volei sentado'}
   ],
   cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
     {n:'Iniciantes',age:'6 a 10 anos',lv:'Iniciante',h:['Ter e Qui · 16h30 às 17h30'],d:'Primeiros passos no voleibol para as crianças.'},
