@@ -18,7 +18,7 @@ const CFG={
   heroImg:'img/hero.jpg',         // caminho/URL da foto do hero
   imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
-    {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'}
+    {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'},
     {src:'img/seleção.jpg',alt:'Seleção de volei sentado'}
   ],
   cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
