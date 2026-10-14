@@ -5,18 +5,18 @@ const CFG={
     texto:'O time de rendimento da AVAP é formado pelas categorias feminina e masculina sub 17 e participa de campeonatos.',
     times:[ // n (nome), cat (categoria), d (descrição), src (foto)
       {n:'Feminino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/time-feminino.jpg'},
-      {n:'Masculino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/hero.jpg'}
+      {n:'Masculino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/time-masculino.jpg'}
     ],
     campeonatos:[ // nome, info (ano, fase ou resultado)
       {nome:'Liga de Vôlei de Sorocaba e Região',info:''},
       {nome:'Taça Paraná',info:''}
     ]
   },
-  noticias:{url:'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7QLsKiJswrkQ5jBPo_H3iVzxV8fD_GzGQewAMIzxx33wNA20ve1HZNKeyKwfkgXk7F0T0PiFzJyAx/pub?gid=0&single=true&output=csv',inicial:4}, // url = link CSV da planilha publicada; inicial = quantas notícias aparecem antes do "Ver mais"
+  noticias:{url:'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7QLsKiJswrkQ5jBPo_H3iVzxV8fD_GzGQewAMIzxx33wNA20ve1HZNKeyKwfkgXk7F0T0PiFzJyAx/pub?gid=0&single=true&output=csv',inicial:3}, // url = link CSV da planilha publicada; inicial = quantas notícias aparecem antes do "Ver mais"
   email:'',           // e-mail da AVAP (ex.: contato@seudominio.com.br)
   addr:'Av. Dr. Artur Bernardes, 1320 - Vila Gabriel, Sorocaba - SP, 18081-000', // ativa mapa e "Como chegar"
   heroImg:'img/hero.jpg',         // caminho/URL da foto do hero
-  imgs:{about:'img/treino.jpg',ronaldo:'',leo:'',eduardo:'',moises:'',arthur:''}, // fotos das seções
+  imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
     {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'}
   ],
@@ -28,7 +28,7 @@ const CFG={
     {n:'Adulto Avançado',age:'18+',lv:'Avançado',h:['Seg, Qua e Sex · 20h30 às 22h00','Sáb · 10h30 às 11h45'],d:'Treinamento avançado para adultos.'}
   ],
   parceiros:[ // name, logo (caminho da imagem), site, insta (@usuario ou link), wa (só números com DDI), email, addr (endereço)
-    {name:'N1 Sport',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
+    {name:'N1 Sport',logo:'',site:'https://www.n1oficial.com.br/',insta:'',wa:'',email:'',addr:''},
     {name:'Parceiro 2',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
     {name:'Parceiro 3',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
     {name:'Parceiro 4',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
@@ -58,7 +58,7 @@ const CFG={
 const wa=m=>'https://wa.me/'+CFG.wa+'?text='+encodeURIComponent(m);
 document.querySelectorAll('[data-wa]').forEach(a=>a.href=wa(CFG.msg[a.dataset.wa]));
 const $=s=>document.querySelector(s);
-function img(el,src,alt){if(src){const i=new Image();i.src=src;i.alt=alt||'';i.loading='lazy';el.prepend(i);const s=el.querySelector('span');if(s)s.remove()}}
+function img(el,src,alt){if(src){const i=new Image();i.src=src;i.alt=alt||'';i.loading='lazy';el.prepend(i);el.classList.add('has');const s=el.querySelector('span');if(s)s.remove()}}
 if(CFG.heroImg)$('#heroBg').style.backgroundImage='url("'+CFG.heroImg+'")';
 document.querySelectorAll('[data-img]').forEach(e=>img(e,CFG.imgs[e.dataset.img],e.textContent));
 /* categorias */
@@ -89,6 +89,7 @@ CFG.parceiros.forEach(s=>{const b=document.createElement('button');b.setAttribut
   if(s.insta)L.push(['📸 Instagram',/^https?:/.test(s.insta)?s.insta:'https://www.instagram.com/'+s.insta.replace('@','')]);
   if(s.wa)L.push(['📱 WhatsApp','https://wa.me/'+s.wa]);
   if(s.email)L.push(['✉️ E-mail','mailto:'+s.email]);
+  if(L.length===1){const u=L[0][1];if(/^https?:/.test(u))window.open(u,'_blank','noopener');else location.href=u;return}
   sml.innerHTML=L.length?L.map(l=>'<a class="btn b3" target="_blank" rel="noopener" href="'+l[1]+'">'+l[0]+'</a>').join(''):'<p class="ed">[Contatos do parceiro — editar]</p>';
   sm.classList.add('o')};
  $('#sp').append(b)});
