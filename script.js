@@ -4,8 +4,8 @@ const CFG={
   rendimento:{ // time de rendimento
     texto:'O time de rendimento da AVAP é formado pelas categorias feminina e masculina sub 17 e participa de campeonatos.',
     times:[ // n (nome), cat (categoria), d (descrição), src (foto)
-      {n:'Feminino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/time-feminino.jpg'},
-      {n:'Masculino',cat:'Sub 17',d:'[Descrição do time — editar]',src:'img/time-masculino.jpg'}
+      {n:'Feminino',cat:'Sub 17',d:'',src:'img/time-feminino.jpg'},
+      {n:'Masculino',cat:'Sub 17',d:'',src:'img/time-masculino.jpg'}
     ],
     campeonatos:[ // nome, info (ano, fase ou resultado)
       {nome:'Liga de Vôlei de Sorocaba e Região',info:''},
@@ -18,7 +18,14 @@ const CFG={
   heroImg:'img/hero-quadra.jpg',         // caminho/URL da foto do hero
   imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
-    {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'},
+    {src:'img/galeria-treino-quadra.jpg',alt:'Treinamento na quadra'},
+    {src:'img/bolas.jpg',alt:'Quadra'},
+    {src:'img/treino.jpg',alt:'Treinamento'},
+    {src:'img/galeria-quadra-vertical.jpg',alt:'Quadra da AVAP'},
+    {src:'img/galeria-encontro-1.jpg',alt:'Atletas e equipe'},
+    {src:'img/galeria-encontro-2.jpg',alt:'Atletas e equipe'},
+    {src:'img/galeria-treino-bolas.jpg',alt:'Treino com bolas'},
+    {src:'img/galeria-encontro-3.jpg',alt:'Atletas e equipe'},
     {src:'img/seleção.jpg',alt:'Seleção de volei sentado'}
   ],
   cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
@@ -143,6 +150,6 @@ if(L.length>n){more.hidden=false;more.onclick=()=>{box.innerHTML=L.map(card).joi
 /* time de rendimento */
 (()=>{const R=CFG.rendimento,ed=s=>/\[/.test(s)?' class="ed"':'',tr='<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>';
 $('#rdTxt').textContent=R.texto;if(/\[/.test(R.texto))$('#rdTxt').classList.add('ed');
-const T=$('#rdTimes');T.innerHTML=R.times.map(t=>`<article class="card"><div class="ph"><span>Foto — ${t.n} ${t.cat}</span></div><div class="tx"><span class="tag">${t.cat}</span><h3>${t.n}</h3><p${ed(t.d)}>${t.d}</p></div></article>`).join('');
+const T=$('#rdTimes');T.innerHTML=R.times.map(t=>`<article class="card"><div class="ph"><span>Foto — ${t.n} ${t.cat}</span></div><div class="tx"><span class="tag">${t.cat}</span><h3>${t.n}</h3>${t.d?'<p'+ed(t.d)+'>'+t.d+'</p>':''}</div></article>`).join('');
 [...T.children].forEach((c,i)=>img(c.querySelector('.ph'),R.times[i].src,R.times[i].n+' '+R.times[i].cat));
 $('#rdCamp').innerHTML=R.campeonatos.map(c=>`<div class="card">${tr}<div><b${ed(c.nome)}>${c.nome}</b>${c.info?`<span${ed(c.info)}>${c.info}</span>`:''}</div></div>`).join('')})();

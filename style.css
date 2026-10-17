@@ -224,3 +224,4 @@ footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
 .dst{min-height:1200px;display:flex;align-items:center}.dst[hidden]{display:none}.dst .w{width:100%}
 .hero .bg{background-position:center 52%}
 [hidden]{display:none!important}
+.gal{grid-auto-flow:dense}
