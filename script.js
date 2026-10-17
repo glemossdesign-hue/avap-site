@@ -15,7 +15,7 @@ const CFG={
   noticias:{url:'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7QLsKiJswrkQ5jBPo_H3iVzxV8fD_GzGQewAMIzxx33wNA20ve1HZNKeyKwfkgXk7F0T0PiFzJyAx/pub?gid=0&single=true&output=csv',inicial:3}, // url = link CSV da planilha publicada; inicial = quantas notícias aparecem antes do "Ver mais"
   email:'',           // e-mail da AVAP (ex.: contato@seudominio.com.br)
   addr:'Av. Dr. Artur Bernardes, 1320 - Vila Gabriel, Sorocaba - SP, 18081-000', // ativa mapa e "Como chegar"
-  heroImg:'img/hero.jpg',         // caminho/URL da foto do hero
+  heroImg:'img/hero-quadra.jpg',         // caminho/URL da foto do hero
   imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
     {src:'img/bolas.jpg',alt:'Quadra'},{src:'img/treino.jpg',alt:'Treinamento'},{src:'',alt:'Atletas'},{src:'',alt:'Equipe técnica'},{src:'',alt:'Momento de treino'},{src:'',alt:'Treinamento'},
