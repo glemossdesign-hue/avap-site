@@ -35,7 +35,7 @@ const CFG={
     {n:'Adulto Avançado',age:'18+',lv:'Avançado',h:['Seg, Qua e Sex · 20h30 às 22h00','Sáb · 10h30 às 11h45'],d:'Treinamento avançado para adultos.'}
   ],
   parceiros:[ // name, logo (caminho da imagem), site, insta (@usuario ou link), wa (só números com DDI), email, addr (endereço)
-    {name:'N1 Sport',logo:'',site:'https://www.n1oficial.com.br/',insta:'',wa:'',email:'',addr:''},
+    {name:'N1 Sport',logo:'img/n1-logo.png',site:'https://www.n1oficial.com.br/',insta:'',wa:'',email:'',addr:''},
     {name:'OVE Voleibol',logo:'img/ove-logo.jpg',site:'',insta:'',wa:'',email:'',addr:''}
   ],
   n1:{ // vitrine (sem preço e sem pedido)

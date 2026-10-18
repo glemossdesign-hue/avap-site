@@ -228,3 +228,4 @@ footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
 .sp{grid-template-columns:repeat(auto-fit,minmax(150px,240px))}.sp button.nolink{cursor:default}.sp button.nolink:hover{transform:none}.sp button.nolink:hover img{filter:none;opacity:1}
 .sp{justify-content:center}
 .sp{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.sp button{flex:1 1 150px;max-width:240px}
+.n1logo{display:block;margin:0 auto 14px;width:clamp(150px,24vw,230px);height:auto;filter:brightness(0) invert(1)}
