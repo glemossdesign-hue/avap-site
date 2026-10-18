@@ -25,8 +25,7 @@ const CFG={
     {src:'img/galeria-encontro-1.jpg',alt:'Atletas e equipe'},
     {src:'img/galeria-encontro-2.jpg',alt:'Atletas e equipe'},
     {src:'img/galeria-treino-bolas.jpg',alt:'Treino com bolas'},
-    {src:'img/galeria-encontro-3.jpg',alt:'Atletas e equipe'},
-    {src:'img/seleção.jpg',alt:'Seleção de volei sentado'}
+    {src:'img/galeria-encontro-3.jpg',alt:'Atletas e equipe'}
   ],
   cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
     {n:'Iniciantes',age:'6 a 10 anos',lv:'Iniciante',h:['Ter e Qui · 16h30 às 17h30'],d:'Primeiros passos no voleibol para as crianças.'},
