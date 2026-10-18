@@ -37,11 +37,7 @@ const CFG={
   ],
   parceiros:[ // name, logo (caminho da imagem), site, insta (@usuario ou link), wa (só números com DDI), email, addr (endereço)
     {name:'N1 Sport',logo:'',site:'https://www.n1oficial.com.br/',insta:'',wa:'',email:'',addr:''},
-    {name:'Parceiro 2',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Parceiro 3',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Parceiro 4',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Parceiro 5',logo:'',site:'',insta:'',wa:'',email:'',addr:''},
-    {name:'Parceiro 6',logo:'',site:'',insta:'',wa:'',email:'',addr:''}
+    {name:'OVE Voleibol',logo:'img/ove-logo.jpg',site:'',insta:'',wa:'',email:'',addr:''}
   ],
   n1:{ // vitrine (sem preço e sem pedido)
     text:'Conheça nossos produtos oficiais',
@@ -88,14 +84,16 @@ document.querySelectorAll('.rv').forEach(e=>io.observe(e));
 /* parceiros */
 const sm=$('#sm'),smn=$('#smn'),sml=$('#sml');
 CFG.parceiros.forEach(s=>{const b=document.createElement('button');b.setAttribute('aria-label',s.name);b.innerHTML='<span>'+s.name+'</span>';img(b,s.logo,s.name);
- b.onclick=()=>{smn.textContent=s.name;const L=[];
-  if(s.addr)L.push(['📍 Localização','https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.addr)]);
-  if(s.site)L.push(['🌐 Site',/^https?:/.test(s.site)?s.site:'https://'+s.site]);
-  if(s.insta)L.push(['📸 Instagram',/^https?:/.test(s.insta)?s.insta:'https://www.instagram.com/'+s.insta.replace('@','')]);
-  if(s.wa)L.push(['📱 WhatsApp','https://wa.me/'+s.wa]);
-  if(s.email)L.push(['✉️ E-mail','mailto:'+s.email]);
+ const L=[];
+ if(s.addr)L.push(['📍 Localização','https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(s.addr)]);
+ if(s.site)L.push(['🌐 Site',/^https?:/.test(s.site)?s.site:'https://'+s.site]);
+ if(s.insta)L.push(['📸 Instagram',/^https?:/.test(s.insta)?s.insta:'https://www.instagram.com/'+s.insta.replace('@','')]);
+ if(s.wa)L.push(['📱 WhatsApp','https://wa.me/'+s.wa]);
+ if(s.email)L.push(['✉️ E-mail','mailto:'+s.email]);
+ if(!L.length){b.classList.add('nolink');b.tabIndex=-1;b.setAttribute('aria-disabled','true')}
+ else b.onclick=()=>{
   if(L.length===1){const u=L[0][1];if(/^https?:/.test(u))window.open(u,'_blank','noopener');else location.href=u;return}
-  sml.innerHTML=L.length?L.map(l=>'<a class="btn b3" target="_blank" rel="noopener" href="'+l[1]+'">'+l[0]+'</a>').join(''):'<p class="ed">[Contatos do parceiro — editar]</p>';
+  smn.textContent=s.name;sml.innerHTML=L.map(l=>'<a class="btn b3" target="_blank" rel="noopener" href="'+l[1]+'">'+l[0]+'</a>').join('');
   sm.classList.add('o')};
  $('#sp').append(b)});
 sm.onclick=e=>{if(e.target===sm||e.target.tagName==='BUTTON')sm.classList.remove('o')};

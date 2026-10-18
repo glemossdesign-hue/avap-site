@@ -148,7 +148,7 @@ header .hb{position:relative;z-index:2}
 .sp{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:36px}
 .sp button{aspect-ratio:3/2;border:1px solid var(--line);background:#fff;border-radius:var(--r);box-shadow:var(--sh);cursor:pointer;display:grid;place-items:center;padding:18px;font:600 .9rem var(--bd);color:#4b5650;transition:transform .25s,box-shadow .25s}
 .sp button:hover{transform:translateY(-4px)}
-.sp img{max-width:100%;max-height:100%;object-fit:contain;filter:grayscale(1);opacity:.85;transition:filter .3s,opacity .3s}.sp button:hover img{filter:none;opacity:1}
+.sp img{max-width:100%;max-height:100%;object-fit:contain;filter:none;opacity:1;transition:filter .3s,opacity .3s}.sp button:hover img{filter:none;opacity:1}
 .eyebrow{font:700 .85rem var(--bd);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 .carw{position:relative;margin-top:30px}
 .car{position:relative;display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px calc(50% - 130px);scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -225,3 +225,6 @@ footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
 .hero .bg{background-position:center 52%}
 [hidden]{display:none!important}
 .gal{grid-auto-flow:dense}
+.sp{grid-template-columns:repeat(auto-fit,minmax(150px,240px))}.sp button.nolink{cursor:default}.sp button.nolink:hover{transform:none}.sp button.nolink:hover img{filter:none;opacity:1}
+.sp{justify-content:center}
+.sp{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}.sp button{flex:1 1 150px;max-width:240px}
