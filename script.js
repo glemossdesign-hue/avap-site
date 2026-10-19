@@ -129,10 +129,16 @@ const norm=h=>h.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g
 const csv=t=>{const o=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';o.push(r);r=[]}else c+=ch}if(c||r.length){r.push(c);o.push(r)}return o};
 const pd=s=>{s=(s||'').trim();let m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1])}m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?new Date(+m[1],+m[2]-1,+m[3]):null};
 const clk='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',pin='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+/* fundo do destaque: uma ou várias fotos (separe por ; na coluna foto) — com várias, trocam sozinhas */
+const fsrc=f=>/^(https?|data):/.test(f)?encodeURI(f):'img/'+encodeURI(f.replace(/^.*\//,''));
+const slides=v=>{const L=(Array.isArray(v)?v:String(v).split(/[;|]/)).map(f=>f.trim()).filter(Boolean),bg=$('#dstBg');bg.innerHTML='';
+const E=L.map((f,i)=>{const d=document.createElement('div');d.className='dst-s'+(i?'':' on');d.style.backgroundImage='url("'+fsrc(f)+'")';bg.append(d);return d});
+if(E.length<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+let i=0;setInterval(()=>{if(document.hidden)return;E[i].classList.remove('on');i=(i+1)%E.length;E[i].classList.add('on')},5500)};
 const dst=x=>{$('#dstT').textContent=x.t||'Novidade';
 $('#dstM').innerHTML=(x.d?'<span class="dst-d"><b>'+String(x.d.getDate()).padStart(2,'0')+'</b>'+MES[x.d.getMonth()]+'</span>':'')+(x.h?'<span>'+clk+esc(x.h)+'</span>':'')+(x.l?'<span>'+pin+esc(x.l)+'</span>':'');
 $('#dstD').innerHTML=esc(x.s).replace(/\n/g,'<br>');
-if(x.foto)$('#dstBg').style.backgroundImage='url("'+(/^https?:/.test(x.foto)?encodeURI(x.foto):'img/'+encodeURI(x.foto.replace(/^.*\//,'')))+'")';
+if(x.foto)slides(x.foto);
 const b=$('#dstB');if(x.btn&&x.lnk){b.textContent=x.btn;b.href=x.lnk.toLowerCase()=='whatsapp'?wa('Olá! Gostaria de saber mais sobre: '+(x.t||'a novidade da AVAP')+'.'):(/^(https?:|mailto:|tel:)/.test(x.lnk)?x.lnk:'https://'+x.lnk);b.hidden=false}
 $('#destaque').hidden=false};
 if(!N.url){msg('Em breve, novidades da AVAP por aqui.');return}
