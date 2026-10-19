@@ -18,14 +18,15 @@ const CFG={
   heroImg:'img/hero-quadra.jpg',         // caminho/URL da foto do hero
   imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
-    {src:'img/galeria-treino-quadra.jpg',alt:'Treinamento na quadra'},
+    {src:'img/galeria-orientacao-quadra.jpg',alt:'Professor orientando os atletas na quadra'},
     {src:'img/bolas.jpg',alt:'Quadra'},
     {src:'img/treino.jpg',alt:'Treinamento'},
-    {src:'img/galeria-quadra-vertical.jpg',alt:'Quadra da AVAP'},
-    {src:'img/galeria-encontro-1.jpg',alt:'Atletas e equipe'},
-    {src:'img/galeria-encontro-2.jpg',alt:'Atletas e equipe'},
-    {src:'img/galeria-treino-bolas.jpg',alt:'Treino com bolas'},
-    {src:'img/galeria-encontro-3.jpg',alt:'Atletas e equipe'}
+    {src:'img/galeria-saque.jpg',alt:'Atleta treinando o saque'},
+    {src:'img/galeria-toque-rede.jpg',alt:'Treino de toque na rede'},
+    {src:'img/galeria-aquecimento.jpg',alt:'Aquecimento em grupo com o professor'},
+    {src:'img/galeria-salto-caixa.jpg',alt:'Treino de salto na quadra'},
+    {src:'img/galeria-roda-conversa.jpg',alt:'Atletas reunidos com o professor'},
+    {src:'img/galeria-orientacao-treino.jpg',alt:'Professor orientando o treino'}
   ],
   cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
     {n:'Iniciantes',age:'6 a 10 anos',lv:'Iniciante',h:['Ter e Qui · 16h30 às 17h30'],d:'Primeiros passos no voleibol para as crianças.'},

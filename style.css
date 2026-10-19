@@ -92,7 +92,7 @@ background:linear-gradient(100deg,rgba(7,24,15,.93) 25%,rgba(20,99,63,.6)),radia
 .gal{grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;margin-top:36px;gap:14px}
 .gal button{border:0;padding:0;cursor:zoom-in;border-radius:var(--r);overflow:hidden;background:none}
 .gal button .ph{height:100%;border-radius:var(--r)}
-.gal button:nth-child(1){grid-column:span 2;grid-row:span 2}.gal button:nth-child(4){grid-row:span 2}
+.gal button:nth-child(1){grid-column:span 2;grid-row:span 2}
 .lb{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:90;display:none;place-items:center;padding:24px}
 .lb.o{display:grid}.lb .ph{width:min(900px,92vw);aspect-ratio:3/2}.lb img{object-fit:contain;background:#000}
 .lb button{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:18px;background:none;border:0;color:#fff;font-size:2.4rem;cursor:pointer}
@@ -129,7 +129,7 @@ header .hb{position:relative;z-index:2}
 .about,.loc{grid-template-columns:1fr}.about .ph{aspect-ratio:16/11}
 .pil{grid-template-columns:1fr 1fr}.pro{grid-template-columns:1fr 1fr}.steps,.ct{grid-template-columns:1fr 1fr}
 .flow{grid-template-columns:1fr}.flow .ar{transform:rotate(90deg);text-align:center}
-.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal button:nth-child(1){grid-column:span 2}.gal button:nth-child(4){grid-row:auto}
+.gal{grid-template-columns:1fr 1fr;grid-auto-rows:150px}.gal button:nth-child(1){grid-column:span 2}
 .fg{grid-template-columns:1fr 1fr}.court{opacity:.5}
 }
 @media (max-width:600px){
