@@ -62,6 +62,7 @@ background:linear-gradient(100deg,rgba(7,24,15,.93) 25%,rgba(20,99,63,.6)),radia
 .gr{display:grid;gap:22px}
 .about{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
 .about .ph{aspect-ratio:4/5}
+.about .ph img{object-position:center 60%}
 .chk{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;list-style:none;padding:0;margin:26px 0 0}
 .chk li{padding-left:28px;position:relative;font-weight:500}
 .chk li::before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--g2);color:#fff;font-size:.72rem;display:grid;place-items:center;top:3px}

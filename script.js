@@ -16,7 +16,7 @@ const CFG={
   email:'avap.adm@gmail.com', // e-mail da AVAP (ex.: contato@seudominio.com.br)
   addr:'Av. Dr. Artur Bernardes, 1320 - Vila Gabriel, Sorocaba - SP, 18081-000', // ativa mapa e "Como chegar"
   heroImg:'img/hero-quadra.jpg',         // caminho/URL da foto do hero
-  imgs:{about:'img/treino.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
+  imgs:{about:'img/galeria-roda-conversa.jpg',ronaldo:'img/royal.jpg',leo:'img/leonidio.jpg',eduardo:'img/eduardo.jpg',moises:'',arthur:''}, // fotos das seções
   gallery:[           // {src:'', alt:''} — troque pelas fotos reais
     {src:'img/galeria-orientacao-quadra.jpg',alt:'Professor orientando os atletas na quadra'},
     {src:'img/bolas.jpg',alt:'Quadra'},
