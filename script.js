@@ -28,6 +28,14 @@ const CFG={
     {src:'img/galeria-roda-conversa.jpg',alt:'Atletas reunidos com o professor'},
     {src:'img/galeria-orientacao-treino.jpg',alt:'Professor orientando o treino'}
   ],
+  bios:{ // resumo da trajetória (abre ao clicar no card do profissional)
+    ronaldo:{nome:'Ronaldo Henrique “Royal”',role:'Fundador',p:['Ex-jogador profissional e levantador, Ronaldo construiu uma carreira de destaque no Brasil e no exterior, defendendo grandes clubes e acumulando experiências internacionais na Itália, no Irã e em Portugal.','Representou a Seleção Brasileira desde as categorias de base, conquistando o Sul-Americano Sub-19 (1992), o Campeonato Mundial Sub-19 (1993) e o Sul-Americano Sub-21 (1994).','Hoje, traz toda essa experiência de alto rendimento para a formação de novos atletas na AVAP.'],dest:['Bicampeonato Paulista e Copa Brasil','Taça de Portugal e Supertaça de Portugal, pelo Benfica','Seleção Brasileira desde as categorias de base']},
+    leo:{nome:'Leonidio Pasquali',role:'Fundador',p:['Atleta olímpico em Seul 1988 e integrante da histórica Geração de Prata do voleibol brasileiro, Léo construiu uma trajetória de 18 anos como atleta profissional, sendo 10 deles defendendo a Seleção Brasileira.','Vestiu a camisa de grandes clubes do voleibol nacional e, após encerrar a carreira nas quadras, seguiu contribuindo para o esporte em diferentes funções técnicas e de gestão.','Em Paris 2024, fez parte da comissão técnica da Seleção dos Estados Unidos de Vôlei Sentado, conquistando a medalha de ouro nos Jogos Paralímpicos.'],dest:['Atleta olímpico em Seul 1988','Geração de Prata do voleibol brasileiro','Ouro paralímpico em Paris 2024 (comissão técnica dos EUA)']},
+    eduardo:{nome:'Eduardo Júnior “Eduzão”',role:'Fundador',p:['Com 20 anos de trajetória como jogador profissional, Eduzão defendeu importantes clubes como Pirelli, Chapecó, Philco, Lupo Náutico, Flamengo, Olympikus, Palmeiras e Esmoriz, de Portugal.','Entre as conquistas estão a Copa do Brasil e o Sul-Americano de Clubes, pelo Chapecó, na Bolívia; o bicampeonato Carioca, por Flamengo e Olympikus; o Campeonato Mineiro, pela Olympikus; e dois vice-campeonatos portugueses com o Esmoriz.','Disputou torneios na Holanda, Eslováquia, Romênia e República Tcheca e recebeu o troféu de Melhor Bloqueio.','Formado em Administração, com MBA em Gestão Empresarial, coordena hoje projetos sociais e esportivos, como Paixão pelo Esporte e De Bem com a Vida, além das equipes de rendimento, contribuindo para a formação esportiva, educacional e pessoal de jovens atletas.'],dest:['Copa do Brasil e Sul-Americano de Clubes (Chapecó)','Duas vezes terceiro lugar na Superliga','Troféu de Melhor Bloqueio']}
+  },
+  evento:{ // seção fixa do evento: fotos que alternam no fundo
+    fotos:['img/voleibol-sentado-treino.jpg','img/voleibol-sentado-foto-grupo.jpg','img/voleibol-sentado-palestra.jpg','img/voleibol-sentado-professor-rede.jpg','img/voleibol-sentado-proteses-mochilas.jpg']
+  },
   cats:[ // grade semanal informada pelo cliente (age = faixa etária, lv = nível, h = horários)
     {n:'Iniciantes',age:'6 a 10 anos',lv:'Iniciante',h:['Ter e Qui · 16h30 às 17h30'],d:'Primeiros passos no voleibol para as crianças.'},
     {n:'Intermediário',age:'11 a 14 anos',lv:'Intermediário',h:['Seg a Sex · 17h30 às 19h00'],d:'Evolução técnica e desenvolvimento dos fundamentos.'},
@@ -64,6 +72,20 @@ if(CFG.heroImg)$('#heroBg').style.backgroundImage='url("'+CFG.heroImg+'")';
 document.querySelectorAll('[data-img]').forEach(e=>img(e,CFG.imgs[e.dataset.img],e.textContent));
 /* categorias */
 $('#cats').innerHTML=CFG.cats.map(c=>`<div class="card"><h3>${c.n}</h3><dl><dt>Faixa etária: </dt><dd>${c.age}</dd><br><dt>Nível: </dt><dd>${c.lv}</dd><br><dt>Horários:</dt><br>${c.h.map(x=>'<dd>'+x+'</dd>').join('<br>')}</dl><p>${c.d}</p><a class="btn b3" target="_blank" rel="noopener" href="${wa('Olá! Tenho interesse no treinamento da categoria '+c.n+' na AVAP.')}">Quero treinar</a></div>`).join('');
+/* fundo do destaque: uma ou várias fotos (separe por ; na coluna foto) — com várias, trocam sozinhas */
+const fsrc=f=>/^(https?|data):/.test(f)?encodeURI(f):'img/'+encodeURI(f.replace(/^.*\//,''));
+const slides=(v,bg=$('#dstBg'))=>{const L=(Array.isArray(v)?v:String(v).split(/[;|]/)).map(f=>f.trim()).filter(Boolean);bg.innerHTML='';
+const E=L.map((f,i)=>{const d=document.createElement('div');d.className='dst-s'+(i?'':' on');d.style.backgroundImage='url("'+fsrc(f)+'")';bg.append(d);return d});
+if(E.length<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+let i=0;setInterval(()=>{if(document.hidden)return;E[i].classList.remove('on');i=(i+1)%E.length;E[i].classList.add('on')},5500)};
+/* profissionais: resumo da trajetória ao clicar no card */
+(()=>{const B=CFG.bios,m=document.createElement('div');m.className='pm';m.hidden=true;m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');
+m.innerHTML='<div class="pb"><button class="px" aria-label="Fechar">×</button><div class="pt"></div></div>';document.body.append(m);
+const t=m.querySelector('.pt'),x=m.querySelector('.px'),close=()=>{m.hidden=true;document.body.style.overflow=''},
+open=k=>{const b=B[k];t.innerHTML='<div class="role">'+b.role+'</div><h3>'+b.nome+'</h3>'+b.p.map(v=>'<p>'+v+'</p>').join('')+'<ul>'+b.dest.map(v=>'<li>'+v+'</li>').join('')+'</ul>';m.hidden=false;document.body.style.overflow='hidden';x.focus()};
+document.querySelectorAll('[data-bio]').forEach(a=>{a.tabIndex=0;a.setAttribute('role','button');a.onclick=()=>open(a.dataset.bio);a.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(a.dataset.bio)}}});
+m.onclick=e=>{if(e.target===m||e.target===x)close()};addEventListener('keydown',e=>{if(e.key==='Escape'&&!m.hidden)close()})})();
+if(CFG.evento)slides(CFG.evento.fotos,$('#evBg'));
 /* galeria + lightbox */
 const gal=$('#gal'),lb=$('#lb'),lbph=$('#lbph');
 CFG.gallery.forEach(g=>{const b=document.createElement('button');b.setAttribute('aria-label','Ampliar: '+g.alt);b.innerHTML='<div class="ph"><span>'+g.alt+'</span></div>';img(b.firstChild,g.src,g.alt);b.onclick=()=>{lbph.innerHTML='<span>'+g.alt+'</span>';img(lbph,g.src,g.alt);lb.classList.add('o')};gal.append(b)});
@@ -129,12 +151,6 @@ const norm=h=>h.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g
 const csv=t=>{const o=[];let r=[],c='',q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==','){r.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';o.push(r);r=[]}else c+=ch}if(c||r.length){r.push(c);o.push(r)}return o};
 const pd=s=>{s=(s||'').trim();let m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;return new Date(y,+m[2]-1,+m[1])}m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?new Date(+m[1],+m[2]-1,+m[3]):null};
 const clk='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',pin='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
-/* fundo do destaque: uma ou várias fotos (separe por ; na coluna foto) — com várias, trocam sozinhas */
-const fsrc=f=>/^(https?|data):/.test(f)?encodeURI(f):'img/'+encodeURI(f.replace(/^.*\//,''));
-const slides=v=>{const L=(Array.isArray(v)?v:String(v).split(/[;|]/)).map(f=>f.trim()).filter(Boolean),bg=$('#dstBg');bg.innerHTML='';
-const E=L.map((f,i)=>{const d=document.createElement('div');d.className='dst-s'+(i?'':' on');d.style.backgroundImage='url("'+fsrc(f)+'")';bg.append(d);return d});
-if(E.length<2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-let i=0;setInterval(()=>{if(document.hidden)return;E[i].classList.remove('on');i=(i+1)%E.length;E[i].classList.add('on')},5500)};
 const dst=x=>{$('#dstT').textContent=x.t||'Novidade';
 $('#dstM').innerHTML=(x.d?'<span class="dst-d"><b>'+String(x.d.getDate()).padStart(2,'0')+'</b>'+MES[x.d.getMonth()]+'</span>':'')+(x.h?'<span>'+clk+esc(x.h)+'</span>':'')+(x.l?'<span>'+pin+esc(x.l)+'</span>':'');
 $('#dstD').innerHTML=esc(x.s).replace(/\n/g,'<br>');
