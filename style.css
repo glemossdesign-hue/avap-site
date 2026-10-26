@@ -250,3 +250,4 @@ footer .ic{width:18px;height:18px;vertical-align:-3px;margin-right:8px}
 .evn-b{min-width:0}.evn-tag{display:inline-block;color:var(--gold);font:700 .75rem var(--bd);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
 .evn-b h3{font-size:1.6rem;margin-bottom:8px;color:#fff}.evn-b p{color:#d6e4db;font-size:.98rem}
 @media (max-width:600px){.evn{flex-direction:column;gap:14px;padding:16px}.evn-d{width:60px}}
+.pro [data-img="moises"] img,.pro [data-img="arthur"] img,.pro [data-img="eduardo"] img{object-position:center 18%}
